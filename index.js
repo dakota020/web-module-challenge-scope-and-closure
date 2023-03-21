@@ -31,10 +31,17 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   
   1. What is the difference between counter1 and counter2?
   
+  **Counter1 uses a closure method while counter2 is using the hoisting method.
+
   2. Which of the two uses a closure? How can you tell?
   
+  **Counter1, this code is nesting a function inside of a function.
+
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+     **Counter1 would be preferable in a scenario where you would need to store information to call upon anywhere in the code.
+     **Counter2 would be preferable in a scenario where you would need to change the variable of the funtion wihtout throwing an error code.
 */
 
 // counter1 code
@@ -64,10 +71,10 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
-}
-
+function inning(){
+ return Math.floor(Math.random() * 3);
+  }
+console.log(inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -83,9 +90,21 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(inningFunc, numInnings){
+
+let homeScore = 0;
+let awayScore = 0;
+
+for (let i = 0; i < numInnings; i++){
+  homeScore = homeScore + inningFunc();
+  awayScore = homeScore + inningFunc();
+} return {
+  'Home': homeScore,
+  'Away': awayScore
 }
+}
+
+console.log(finalScore(inning, 9));
 
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -101,10 +120,14 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
-
+function getInningScore(inningCB) {
+  return {
+    Home: inningCB(),
+    Away: inningCB()
+  }
 }
+
+console.log(getInningScore(inning));
 
 
 /* STRETCH: ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
@@ -147,8 +170,8 @@ Use the scoreboard function below to do the following:
   "This game will require extra innings: Away 10 - Home 10"
 ] */
 // NOTE: There is no test associated with this code; if your output matches the given example, consider it complete!
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard() {
+ 
 }
 
 
